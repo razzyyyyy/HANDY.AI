@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.A.R.V.I.S</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000810;
+            color: #00c2ff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .status {
+            font-size: 2em;
+            text-align: center;
+            margin-top: 40px;
+            text-shadow: 0 0 10px #00c2ff;
+            animation: blink 2s infinite;
+        }
+
+        .warning {
+            color: #ff0000;
+            font-size: 1.5em;
+            text-align: center;
+            margin-top: 20px;
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        .circles-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .circle {
+            width: 150px;
+            height: 150px;
+            border: 2px solid #00c2ff;
+            border-radius: 50%;
+            position: relative;
+            animation: rotate 4s linear infinite;
+        }
+
+        .circle:nth-child(2) { animation-duration: 6s; }
+        .circle:nth-child(3) { animation-duration: 8s; }
+
+        .stats {
+            margin-top: 40px;
+            font-size: 1.2em;
+        }
+
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #00c2ff;
+            opacity: 0.3;
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes scan {
+            from { top: 0; }
+            to { top: 100%; }
+        }
+
+        @keyframes blink {
+            50% { opacity: 0.7; }
+        }
+
+        .hologram-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 194, 255, 0.03) 0px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="scan-line"></div>
+        <div class="hologram-overlay"></div>
+        
+        <div class="status">
+            H.A.N.D.Y. INTERFACE<br>
+            SYSTEMS INITIALIZATION
+        </div>
+
+        <div class="warning">
+            ! WORK IN PROGRESS !<br>
+            PLEASE BE PATIENT UNTIL LAUNCH
+        </div>
+
+        <div class="circles-container">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+
+        <div class="stats">
+            <div>CORE SYSTEMS: OFFLINE</div>
+            <div>NEURAL NETWORK: PENDING ACTIVATION</div>
+            <div>QUANTUM PROCESSOR: MAINTENANCE MODE</div>
+            <div>DEVELOPMENT STATUS: PRE-ALPHA</div>
+            <div>ESTIMATED COMPLETION: UNKNOWN</div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            if ('speechSynthesis' in window) {
+                const msg = new SpeechSynthesisUtterance(
+                    "H.A.N.D.Y. interface detected. Warning: System is currently in development. All primary functions are offline until launch. Please be patient."
+                );
+                window.speechSynthesis.speak(msg);
+            }
+        };
+
+        // Press Escape to exit fullscreen
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+
+        // Double click to enter fullscreen
+        document.addEventListener('dblclick', function() {
+            document.documentElement.requestFullscreen();
+        });
+    </script>
+</body>
+</html>
